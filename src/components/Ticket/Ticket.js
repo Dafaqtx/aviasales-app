@@ -5,10 +5,12 @@ import Segment from "../Segment";
 import "./style.scss";
 
 const Ticket = ({ ticket }) => {
+  const { price, carrier, segments } = ticket;
+
   return (
     <div className="Ticket">
-      <TicketHeader price={ticket.price} carrier={ticket.carrier} />
-      <Segment segments={ticket.segments} />
+      <TicketHeader price={price} carrier={carrier} />
+      <Segment segments={segments} />
     </div>
   );
 };
