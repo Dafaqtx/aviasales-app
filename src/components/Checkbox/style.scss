@@ -1,0 +1,56 @@
+@import '../../theme/variables.scss';
+
+$check: '../../assets/check.svg';
+
+.Checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &__input {
+        display: none;
+
+        &:checked {
+            &+label {
+                &::before {
+                    border-color: $accent;
+                }
+
+                &::after {
+                    content: '';
+                    background: url('../../assets/check.svg') center no-repeat;
+                    width: 12px;
+                    display: block;
+                    height: 12px;
+                    position: absolute;
+                    top: 5px;
+                    left: 5px;
+                }
+            }
+        }
+    }
+
+    &__label {
+        font-size: 13px;
+        line-height: 20px;
+        color: $gray;
+        position: relative;
+        cursor: pointer;
+        padding-left: 30px;
+
+        &::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 1px solid #9ABBCE;
+            border-radius: 2px;
+            position: absolute;
+            left: 0;
+            top: -1px;
+        }
+    }
+}
