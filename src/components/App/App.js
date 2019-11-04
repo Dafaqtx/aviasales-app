@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 
 import Header from "../Header";
 import Sidebar from "../Sidebar";
