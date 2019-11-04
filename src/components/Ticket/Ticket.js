@@ -1,4 +1,5 @@
 import React from "react";
+import moment from 'moment';
 import './style.scss';
 
 const Ticket = () => {
@@ -22,6 +23,15 @@ const Ticket = () => {
       }
     ]
   };
+
+  const formattedMinutes = (minutes) => {
+    const formattedHours = Math.floor((minutes / 60));
+    const formattedMinutes = Math.round(((minutes / 60) - formattedHours) * 60);
+
+    return `${formattedHours}ч ${formattedMinutes}м`;
+  }
+
+
   return (
         <div className="Ticket">
             <div className="Ticket__header">
@@ -33,11 +43,15 @@ const Ticket = () => {
                     <div className="segment__row" key={id}>
                         <div className="segment__col segment__path">
                             <span className="segment__text">{`${segment.origin} - ${segment.destination}`}</span>
-                            <div className="segment__value">{`${segment.date} – 08:00`}</div>
+                            <div className="segment__value">
+                                {`${moment(segment.date).format('HH:mm')} – ${moment(segment.date).add(segment.duration, 'minutes').format('HH:mm')}`}
+                            </div>
                         </div>
                         <div className="segment__col segment__time">
                             <span className="segment__text">В пути</span>
-                            <div className="segment__value">{`${segment.duration} минут`}</div>
+                            <div className="segment__value">
+                                {`${formattedMinutes(segment.duration)}`}
+                            </div>
                         </div>
                         <div className="segment__col segment__stops">
                             <span className="segment__text">{`${segment.stops.length} пересадки`}</span>
