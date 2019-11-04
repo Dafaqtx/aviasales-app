@@ -1,1 +1,3 @@
-export default price => price.toLocaleString();
+const formattedPrice = price => price.toLocaleString();
+
+export default formattedPrice;

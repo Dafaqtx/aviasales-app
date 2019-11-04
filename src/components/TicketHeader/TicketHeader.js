@@ -1,5 +1,5 @@
 import React from "react";
-import formattedPrice from "../../formatters/formattedPrice";
+import { formattedPrice } from "../../formatters/";
 import "./style.scss";
 
 const TicketHeader = ({ price, carrier }) => {
