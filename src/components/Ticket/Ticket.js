@@ -1,5 +1,7 @@
 import React from "react";
 import moment from 'moment';
+
+import TicketHeader from '../TicketHeader'
 import './style.scss';
 
 const Ticket = ({ticket}) => {
@@ -10,8 +12,6 @@ const Ticket = ({ticket}) => {
 
     return `${formattedHours}ч ${formattedMinutes}м`;
   }
-
-  const formattedPrice = price => price.toLocaleString()
 
   const formattedStops = (stop, last) => {
     if (!last) {
@@ -32,10 +32,7 @@ const Ticket = ({ticket}) => {
 
   return (
         <div className="Ticket">
-            <div className="Ticket__header">
-                <div className="Ticket__price">{`${formattedPrice(ticket.price)} Р `}</div>
-                <div className="Ticket__carrier">{ticket.carrier}</div>
-            </div>
+            <TicketHeader price={ticket.price} carrier={ticket.carrier} />
             <div className="Ticket__segments segment">
                 {ticket.segments.map((segment, id) => (
                     <div className="segment__row" key={id}>
