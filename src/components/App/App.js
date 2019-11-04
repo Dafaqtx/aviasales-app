@@ -5,6 +5,7 @@ import Header from "../Header";
 import Sidebar from "../Sidebar";
 import Content from "../Content";
 import Spinner from "../Spinner";
+import ErrorMessage from "../ErrorMessage";
 
 import "./styles.scss";
 
@@ -48,7 +49,7 @@ function App() {
               <Content tickets={tickets} />
             </div>
           ) : (
-            <div>Something went wrong ...</div>
+            <ErrorMessage />
           )}
         </div>
       )}
