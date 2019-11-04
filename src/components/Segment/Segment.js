@@ -2,6 +2,7 @@ import React from "react";
 import moment from "moment";
 
 import SegmentText from "../SegmentText";
+import SegmentValue from "../SegmentValue";
 
 import {
   formattedMinutes,
@@ -21,11 +22,11 @@ const Segment = ({ segments }) => {
               origin={segment.origin}
               destination={segment.destination}
             />
-            <div className="segment__value">
+            <SegmentValue>
               {`${moment(segment.date).format("HH:mm")} – ${moment(segment.date)
                 .add(segment.duration, "minutes")
                 .format("HH:mm")}`}
-            </div>
+            </SegmentValue>
           </div>
           <div className="segment__col segment__time">
             <span className="segment__text">В пути</span>
