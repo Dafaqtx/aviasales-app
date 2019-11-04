@@ -1,4 +1,7 @@
 .App {
-    width: 755px;
-    margin: auto;
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
 }

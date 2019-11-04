@@ -18,10 +18,10 @@ function App() {
       setIsLoading(true);
 
       try {
-        const searchIdResult = await axios(`${url}/search`);
-        const searchId = searchIdResult.data.searchId;
-        const result = await axios(`${url}/tickets?searchId=${searchId}`);
-        setTickets(result.data.tickets);
+        // const searchIdResult = await axios(`${url}/search`);
+        // const searchId = searchIdResult.data.searchId;
+        // const result = await axios(`${url}/tickets?searchId=${searchId}`);
+        // setTickets(result.data.tickets);
         setIsLoading(false);
       } catch (error) {
         setIsError(true);
@@ -35,11 +35,13 @@ function App() {
     <div className="App">
         {isError && <div>Something went wrong ...</div>}
         {isLoading ? 'Loading...' : (
-          <>
+          <div className="container">
             <Header />
-            <Sidebar />
-            <Content tickets={tickets}/>
-          </>
+            <div className="App__wrapper">
+              <Sidebar />
+              <Content tickets={tickets}/>
+            </div>
+          </div>
         )}
     </div>
   );
