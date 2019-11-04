@@ -1,11 +1,16 @@
 import React from "react";
-import './style.scss';
+
+import Filter from "../Filter";
+
+import "./style.scss";
 
 const Sidebar = () => {
   return (
     <aside className="Sidebar">
-      Sidebar
-    </aside>);
+      <h2 className="Sidebar__title">Количество пересадок</h2>
+      <Filter />
+    </aside>
+  );
 };
 
 export default Sidebar;
