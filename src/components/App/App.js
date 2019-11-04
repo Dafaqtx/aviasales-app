@@ -7,39 +7,38 @@ import './styles.scss'
 
 function App() {
   const url = 'https://front-test.beta.aviasales.ru';
-  const [searchId, setSearchId] = useState('')
   const [tickets, setTickets] = useState([])
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const getSearchId = async () => {
-      const result = await axios(`${url}/search`);
-      setSearchId(result.data.searchId);
-    };
-    getSearchId();
-  }, []);
-
+  const [isError, setIsError] = useState(false);
 
 
   useEffect(() => {
     const getTickets = async () => {
+      setIsError(false);
       setIsLoading(true);
-      const result = await axios(
-        `${url}/tickets?searchId=${searchId}`,
-      );
-      setTickets(result.data.tickets);
-      setIsLoading(false);
+
+      try {
+        const searchIdResult = await axios(`${url}/search`);
+        const searchId = searchIdResult.data.searchId;
+        const result = await axios(`${url}/tickets?searchId=${searchId}`);
+        setTickets(result.data.tickets);
+        setIsLoading(false);
+      } catch (error) {
+        setIsError(true);
+        setIsLoading(false);
+      }
     };
     getTickets();
-  }, [searchId]);
+  }, []);
 
   return (
     <div className="App">
+        {isError && <div>Something went wrong ...</div>}
         {isLoading ? 'Loading...' : (
           <>
             <Header />
             <Sidebar />
-            <Content />
+            <Content tickets={tickets}/>
           </>
         )}
     </div>
