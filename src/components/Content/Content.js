@@ -1,18 +1,14 @@
-import React from 'react'
+import React from "react";
+import Tabs from "../Tabs";
+import Tickets from "../Tickets";
 
-const Content = ({tickets}) => {
-    return <div className="Content">
-        {tickets.length ? (
-            <ul>
-                {tickets.map((ticket, id) => ( 
-                    <li key={id}>{ticket.carrier}</li>
-                ))}
-            </ul>
-
-        ) : (
-            <p>No results</p>
-        )}
+const Content = ({ tickets }) => {
+  return (
+    <div className="Content">
+      <Tabs />
+      <Tickets />
     </div>
-}
+  );
+};
 
-export default Content
+export default Content;
