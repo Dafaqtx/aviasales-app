@@ -9,9 +9,7 @@ function App() {
   const url = 'https://front-test.beta.aviasales.ru';
   const [searchId, setSearchId] = useState('')
   const [tickets, setTickets] = useState([])
-
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getSearchId = async () => {
@@ -25,19 +23,25 @@ function App() {
 
   useEffect(() => {
     const getTickets = async () => {
+      setIsLoading(true);
       const result = await axios(
         `${url}/tickets?searchId=${searchId}`,
       );
       setTickets(result.data.tickets);
+      setIsLoading(false);
     };
     getTickets();
   }, [searchId]);
 
   return (
     <div className="App">
-        <Header />
-        <Sidebar />
-        <Content />
+        {isLoading ? 'Loading...' : (
+          <>
+            <Header />
+            <Sidebar />
+            <Content />
+          </>
+        )}
     </div>
   );
 }
