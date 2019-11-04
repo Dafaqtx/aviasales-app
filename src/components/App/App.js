@@ -8,24 +8,20 @@ import Content from "../Content";
 import Spinner from "../Spinner";
 import ErrorMessage from "../ErrorMessage";
 
-import Store from "../../redux/store";
-import * as ActionTypes from "../../redux/actions";
+import { getTickets } from "../../redux/actions";
 
 import "./styles.scss";
 
-function App() {
+function App({ test }) {
   const url = "https://front-test.beta.aviasales.ru";
   const [tickets, setTickets] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const store = Store();
-
   useEffect(() => {
     const getTickets = async () => {
       setIsError(false);
       setIsLoading(true);
-      store.dispatch(ActionTypes.getTickets.request());
 
       try {
         const {
@@ -38,14 +34,12 @@ function App() {
 
         if (!stop) {
           setTickets(tickets);
-          store.dispatch(ActionTypes.getTickets.success(tickets));
         }
 
         setIsLoading(false);
       } catch (error) {
         setIsError(true);
         setIsLoading(false);
-        store.dispatch(ActionTypes.getTickets.failure(error));
       }
     };
     getTickets();
@@ -72,4 +66,13 @@ function App() {
   );
 }
 
-export default App;
+export default connect(
+  state => ({
+    test: state
+  }),
+  {
+    getTickets: () => {
+      getTickets();
+    }
+  }
+)(App);
