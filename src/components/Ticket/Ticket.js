@@ -24,18 +24,20 @@ const Ticket = ({ticket}) => {
 //     ]
 //   };
 
-  const formattedMinutes = (minutes) => {
+  const formattedMinutes = minutes => {
     const formattedHours = Math.floor((minutes / 60));
     const formattedMinutes = Math.round(((minutes / 60) - formattedHours) * 60);
 
     return `${formattedHours}ч ${formattedMinutes}м`;
   }
 
+  const formattedPrice = price => price.toLocaleString()
+
 
   return (
         <div className="Ticket">
             <div className="Ticket__header">
-                <div className="Ticket__price">{`${ticket.price} Р `}</div>
+                <div className="Ticket__price">{`${formattedPrice(ticket.price)} Р `}</div>
                 <div className="Ticket__carrier">{ticket.carrier}</div>
             </div>
             <div className="Ticket__segments segment">
