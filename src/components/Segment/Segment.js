@@ -3,12 +3,9 @@ import moment from "moment";
 
 import SegmentText from "../SegmentText";
 import SegmentValue from "../SegmentValue";
+import SegmentStop from "../SegmentStop";
 
-import {
-  formattedMinutes,
-  formattedStops,
-  fromattedTrans
-} from "../../formatters";
+import { formattedMinutes, fromattedTrans } from "../../formatters";
 
 import "./style.scss";
 
@@ -26,22 +23,16 @@ const Segment = ({ segments }) => {
             </SegmentValue>
           </div>
           <div className="segment__col segment__time">
-            <span className="segment__text">В пути</span>
-            <div className="segment__value">
+            <SegmentText>В пути</SegmentText>
+            <SegmentValue>
               {`${formattedMinutes(segment.duration)}`}
-            </div>
+            </SegmentValue>
           </div>
           <div className="segment__col segment__stops">
-            <span className="segment__text">
-              {fromattedTrans(segment.stops.length)}
-            </span>
-            <div className="segment__value">
-              {segment.stops.map((stop, id) => (
-                <span key={id}>
-                  {formattedStops(stop, id + 1 === segment.stops.length)}
-                </span>
-              ))}
-            </div>
+            <SegmentText>{fromattedTrans(segment.stops.length)}</SegmentText>
+            <SegmentValue>
+              <SegmentStop stops={segment.stops} />
+            </SegmentValue>
           </div>
         </div>
       ))}
