@@ -4,6 +4,7 @@ import moment from "moment";
 import SegmentText from "../SegmentText";
 import SegmentValue from "../SegmentValue";
 import SegmentStop from "../SegmentStop";
+import SegmentCol from "../SegmentCol";
 
 import { formattedMinutes, fromattedTrans } from "../../formatters";
 
@@ -14,26 +15,26 @@ const Segment = ({ segments }) => {
     <div className="Segment">
       {segments.map((segment, id) => (
         <div className="segment__row" key={id}>
-          <div className="segment__col segment__path">
+          <SegmentCol>
             <SegmentText>{`${segment.origin} - ${segment.destination}`}</SegmentText>
             <SegmentValue>
               {`${moment(segment.date).format("HH:mm")} – ${moment(segment.date)
                 .add(segment.duration, "minutes")
                 .format("HH:mm")}`}
             </SegmentValue>
-          </div>
-          <div className="segment__col segment__time">
+          </SegmentCol>
+          <SegmentCol>
             <SegmentText>В пути</SegmentText>
             <SegmentValue>
               {`${formattedMinutes(segment.duration)}`}
             </SegmentValue>
-          </div>
-          <div className="segment__col segment__stops">
+          </SegmentCol>
+          <SegmentCol>
             <SegmentText>{fromattedTrans(segment.stops.length)}</SegmentText>
             <SegmentValue>
               <SegmentStop stops={segment.stops} />
             </SegmentValue>
-          </div>
+          </SegmentCol>
         </div>
       ))}
     </div>
