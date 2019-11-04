@@ -4,7 +4,15 @@ import Ticket from "../Ticket";
 const Tickets = ({ tickets }) => {
   return (
     <div className="Tickets">
-      <Ticket />
+      {tickets.length ? (
+        <div>
+          {tickets.map(ticket => (
+            <Ticket ticket={ticket} />
+          ))}
+        </div>
+      ) : (
+        "Tickets not found"
+      )}
     </div>
   );
 };

@@ -17,10 +17,12 @@ function App() {
       setIsLoading(true);
 
       try {
-        // const searchIdResult = await axios(`${url}/search`);
-        // const searchId = searchIdResult.data.searchId;
-        // const result = await axios(`${url}/tickets?searchId=${searchId}`);
-        // setTickets(result.data.tickets);
+        const searchIdResult = await axios(`${url}/search`);
+        const searchId = searchIdResult.data.searchId;
+        const result = await axios(`${url}/tickets?searchId=${searchId}`);
+        if (!result.data.stop) {
+          setTickets(result.data.tickets);
+        }
         setIsLoading(false);
       } catch (error) {
         setIsError(true);
