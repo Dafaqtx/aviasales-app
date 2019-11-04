@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import Ticket from "../Ticket";
 
-const Tickets = () => {
-    return (
-        <div className="Tickets">
-            Tickets
-        </div>
-    )
-}
+const Tickets = ({ tickets }) => {
+  return (
+    <div className="Tickets">
+      <Ticket />
+    </div>
+  );
+};
 
-export default Tickets
+export default Tickets;

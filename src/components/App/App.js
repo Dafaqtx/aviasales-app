@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// eslint-disable-next-line
 import axios from "axios";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
@@ -7,9 +6,7 @@ import Content from "../Content";
 import "./styles.scss";
 
 function App() {
-  // eslint-disable-next-line
   const url = "https://front-test.beta.aviasales.ru";
-  // eslint-disable-next-line
   const [tickets, setTickets] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
