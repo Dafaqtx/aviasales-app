@@ -8,6 +8,9 @@ import Content from "../Content";
 import Spinner from "../Spinner";
 import ErrorMessage from "../ErrorMessage";
 
+import Store from "../../redux/store";
+import * as ActionTypes from "../../redux/actions";
+
 import "./styles.scss";
 
 function App() {
@@ -16,10 +19,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  const store = Store();
+
   useEffect(() => {
     const getTickets = async () => {
       setIsError(false);
       setIsLoading(true);
+      store.dispatch(ActionTypes.getTickets.request());
 
       try {
         const {
@@ -30,12 +36,16 @@ function App() {
           data: { stop, tickets }
         } = await axios(`${url}/tickets?searchId=${searchId}`);
 
-        if (!stop) setTickets(tickets);
+        if (!stop) {
+          setTickets(tickets);
+          store.dispatch(ActionTypes.getTickets.success(tickets));
+        }
 
         setIsLoading(false);
       } catch (error) {
         setIsError(true);
         setIsLoading(false);
+        store.dispatch(ActionTypes.getTickets.failure(error));
       }
     };
     getTickets();
