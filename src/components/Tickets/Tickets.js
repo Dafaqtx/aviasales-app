@@ -6,8 +6,8 @@ const Tickets = ({ tickets }) => {
     <div className="Tickets">
       {tickets.length ? (
         <div>
-          {tickets.map(ticket => (
-            <Ticket ticket={ticket} />
+          {tickets.map((ticket, id) => (
+            <Ticket key={id} ticket={ticket} />
           ))}
         </div>
       ) : (

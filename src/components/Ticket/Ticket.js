@@ -33,6 +33,22 @@ const Ticket = ({ticket}) => {
 
   const formattedPrice = price => price.toLocaleString()
 
+  const formattedStops = (stop, last) => {
+    if (!last) {
+        return `${stop}, `;
+    } else {
+        return stop;
+    }
+  }
+
+  const fromattedTrans = (count) => {
+    if (count === 0) {
+        return 'Без пересадок';
+    }
+    
+    return count === 1 ? '1 пересадка' : `${count} пересадки`;
+  }
+
 
   return (
         <div className="Ticket">
@@ -56,9 +72,9 @@ const Ticket = ({ticket}) => {
                             </div>
                         </div>
                         <div className="segment__col segment__stops">
-                            <span className="segment__text">{`${segment.stops.length} пересадки`}</span>
+                            <span className="segment__text">{fromattedTrans(segment.stops.length)}</span>
                             <div className="segment__value">
-                                {segment.stops.map((stop, id) => (<span key={id}>{stop}</span>))}
+                                {segment.stops.map((stop, id) => (<span key={id}>{formattedStops(stop, id + 1 === segment.stops.length)}</span>))}
                             </div>
                         </div>
                     </div>
