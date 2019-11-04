@@ -34,16 +34,19 @@ function App() {
 
   return (
     <div className="App">
-      {isError && <div>Something went wrong ...</div>}
-      {isLoading && !isError ? (
+      {isLoading ? (
         "Loading..."
       ) : (
         <div className="container">
           <Header />
-          <div className="App__wrapper">
-            <Sidebar />
-            <Content tickets={tickets} />
-          </div>
+          {!isError ? (
+            <div className="App__wrapper">
+              <Sidebar />
+              <Content tickets={tickets} />
+            </div>
+          ) : (
+            <div>Something went wrong ...</div>
+          )}
         </div>
       )}
     </div>
