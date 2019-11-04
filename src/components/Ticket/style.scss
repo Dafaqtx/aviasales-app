@@ -21,20 +21,4 @@
     &__col {
         flex: 1;
     }
-
-    &__text {
-        font-weight: 600;
-        font-size: 12px;
-        line-height: 18px;
-        letter-spacing: 0.5;
-        text-transform: uppercase;
-        color: $light-gray;
-    }
-
-    &__value {
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 21px;
-        color: $gray;
-    }
 }
