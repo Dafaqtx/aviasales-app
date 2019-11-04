@@ -35,7 +35,7 @@ function App() {
   return (
     <div className="App">
       {isError && <div>Something went wrong ...</div>}
-      {isLoading ? (
+      {isLoading && !isError ? (
         "Loading..."
       ) : (
         <div className="container">
