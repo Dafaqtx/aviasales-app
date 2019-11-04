@@ -1,9 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: $open-sans;
     background: $bg;
 }
 
-.container{
+.container {
     width: 755px;
     margin: auto;
+}
+
+button {
+    cursor: pointer;
 }

@@ -1,16 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import Header from '../Header'
-import Sidebar from '../Sidebar'
-import Content from '../Content'
-import './styles.scss'
+import React, { useState, useEffect } from "react";
+// eslint-disable-next-line
+import axios from "axios";
+import Header from "../Header";
+import Sidebar from "../Sidebar";
+import Content from "../Content";
+import "./styles.scss";
 
 function App() {
-  const url = 'https://front-test.beta.aviasales.ru';
-  const [tickets, setTickets] = useState([])
+  // eslint-disable-next-line
+  const url = "https://front-test.beta.aviasales.ru";
+  // eslint-disable-next-line
+  const [tickets, setTickets] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-
 
   useEffect(() => {
     const getTickets = async () => {
@@ -33,16 +35,18 @@ function App() {
 
   return (
     <div className="App">
-        {isError && <div>Something went wrong ...</div>}
-        {isLoading ? 'Loading...' : (
-          <div className="container">
-            <Header />
-            <div className="App__wrapper">
-              <Sidebar />
-              <Content tickets={tickets}/>
-            </div>
+      {isError && <div>Something went wrong ...</div>}
+      {isLoading ? (
+        "Loading..."
+      ) : (
+        <div className="container">
+          <Header />
+          <div className="App__wrapper">
+            <Sidebar />
+            <Content tickets={tickets} />
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 }

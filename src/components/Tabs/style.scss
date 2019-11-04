@@ -1,0 +1,27 @@
+@import '../../theme/variables.scss';
+
+.Tabs {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+
+    &__button {
+        flex: 1;
+        height: 50px;
+        background: $white;
+        border: 1px solid $border-color;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 20px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: $gray;
+        font-weight: normal;
+
+        &--active {
+            background: $accent;
+            color: $white;
+        }
+    }
+}
