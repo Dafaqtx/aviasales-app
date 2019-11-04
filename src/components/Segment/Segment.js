@@ -1,6 +1,8 @@
 import React from "react";
 import moment from "moment";
 
+import SegmentText from "../SegmentText";
+
 import {
   formattedMinutes,
   formattedStops,
@@ -15,7 +17,10 @@ const Segment = ({ segments }) => {
       {segments.map((segment, id) => (
         <div className="segment__row" key={id}>
           <div className="segment__col segment__path">
-            <span className="segment__text">{`${segment.origin} - ${segment.destination}`}</span>
+            <SegmentText
+              origin={segment.origin}
+              destination={segment.destination}
+            />
             <div className="segment__value">
               {`${moment(segment.date).format("HH:mm")} – ${moment(segment.date)
                 .add(segment.duration, "minutes")
