@@ -7,8 +7,11 @@ import './styles.scss'
 
 function App() {
   const url = 'https://front-test.beta.aviasales.ru';
-  const [searchId, setSearchId] = useState([])
+  const [searchId, setSearchId] = useState('')
   const [tickets, setTickets] = useState([])
+
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const getSearchId = async () => {
@@ -17,6 +20,7 @@ function App() {
     };
     getSearchId();
   }, []);
+
 
 
   useEffect(() => {
