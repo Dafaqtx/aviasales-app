@@ -3,26 +3,6 @@ import moment from 'moment';
 import './style.scss';
 
 const Ticket = ({ticket}) => {
-//   const ticket = {
-//     carrier: "EY",
-//     price: 26960,
-//     segments: [
-//       {
-//         date: "2019-11-14T17:35:00.000Z",
-//         destination: "HKT",
-//         duration: 1359,
-//         origin: "MOW",
-//         stops: ["AUH"]
-//       },
-//       {
-//         date: "2019-12-04T04:40:00.000Z",
-//         destination: "HKT",
-//         duration: 1463,
-//         origin: "SET",
-//         stops: ["DXB"]
-//       }
-//     ]
-//   };
 
   const formattedMinutes = minutes => {
     const formattedHours = Math.floor((minutes / 60));
