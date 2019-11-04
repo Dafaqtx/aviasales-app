@@ -1,11 +1,6 @@
 @import '../../theme/variables.scss';
 
 .Segment {
-    &__row {
-        display: flex;
-        margin-bottom: 10px;
-    }
-
     &__text {
         font-weight: 600;
         font-size: 12px;

@@ -5,6 +5,7 @@ import SegmentText from "../SegmentText";
 import SegmentValue from "../SegmentValue";
 import SegmentStop from "../SegmentStop";
 import SegmentCol from "../SegmentCol";
+import SegmentRow from "../SegmentRow";
 
 import { formattedMinutes, fromattedTrans } from "../../formatters";
 
@@ -14,7 +15,7 @@ const Segment = ({ segments }) => {
   return (
     <div className="Segment">
       {segments.map((segment, id) => (
-        <div className="segment__row" key={id}>
+        <SegmentRow key={id}>
           <SegmentCol>
             <SegmentText>{`${segment.origin} - ${segment.destination}`}</SegmentText>
             <SegmentValue>
@@ -35,7 +36,7 @@ const Segment = ({ segments }) => {
               <SegmentStop stops={segment.stops} />
             </SegmentValue>
           </SegmentCol>
-        </div>
+        </SegmentRow>
       ))}
     </div>
   );
