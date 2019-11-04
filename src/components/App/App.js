@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import Content from "../Content";
+import Spinner from "../Spinner";
+
 import "./styles.scss";
 
 function App() {
@@ -35,7 +38,7 @@ function App() {
   return (
     <div className="App">
       {isLoading ? (
-        "Loading..."
+        <Spinner />
       ) : (
         <div className="container">
           <Header />
