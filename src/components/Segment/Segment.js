@@ -18,10 +18,7 @@ const Segment = ({ segments }) => {
       {segments.map((segment, id) => (
         <div className="segment__row" key={id}>
           <div className="segment__col segment__path">
-            <SegmentText
-              origin={segment.origin}
-              destination={segment.destination}
-            />
+            <SegmentText>{`${segment.origin} - ${segment.destination}`}</SegmentText>
             <SegmentValue>
               {`${moment(segment.date).format("HH:mm")} – ${moment(segment.date)
                 .add(segment.duration, "minutes")
