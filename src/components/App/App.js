@@ -8,6 +8,7 @@ import Content from "../Content";
 import Spinner from "../Spinner";
 import ErrorMessage from "../ErrorMessage";
 import { fetchSearchId } from "../../redux/actions/searchIdActions";
+import { fetchTickets } from "../../redux/actions/ticketsActions";
 
 import "./styles.scss";
 
@@ -45,6 +46,11 @@ const App = ({ searchId, dispatch }) => {
   // }, []);
   useEffect(() => {
     dispatch(fetchSearchId());
+    dispatch(fetchTickets(searchId));
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchTickets(searchId));
   }, []);
 
   return (
