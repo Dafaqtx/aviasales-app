@@ -3,7 +3,6 @@ import * as ActionTypes from "./actions";
 
 export const initialState = {
   tickets: [],
-  selectedFilters: [],
   ticketsAreLoaded: false
 };
 

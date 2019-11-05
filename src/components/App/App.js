@@ -12,42 +12,44 @@ import { getTickets } from "../../redux/actions";
 
 import "./styles.scss";
 
-function App({ test }) {
-  const url = "https://front-test.beta.aviasales.ru";
-  const [tickets, setTickets] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+const App = ({ tickets, ticketsAreLoaded }) => {
+  console.log(tickets);
+  // const url = "https://front-test.beta.aviasales.ru";
+  // const [tickets, setTickets] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    const getTickets = async () => {
-      setIsError(false);
-      setIsLoading(true);
+  // useEffect(() => {
+  //   const getTickets = async () => {
+  //     setIsError(false);
+  //     setIsLoading(true);
 
-      try {
-        const {
-          data: { searchId }
-        } = await axios(`${url}/search`);
+  //     try {
+  //       const {
+  //         data: { searchId }
+  //       } = await axios(`${url}/search`);
 
-        const {
-          data: { stop, tickets }
-        } = await axios(`${url}/tickets?searchId=${searchId}`);
+  //       const {
+  //         data: { stop, tickets }
+  //       } = await axios(`${url}/tickets?searchId=${searchId}`);
 
-        if (!stop) {
-          setTickets(tickets);
-        }
+  //       if (!stop) {
+  //         setTickets(tickets);
+  //       }
 
-        setIsLoading(false);
-      } catch (error) {
-        setIsError(true);
-        setIsLoading(false);
-      }
-    };
-    getTickets();
-  }, []);
+  //       setIsLoading(false);
+  //     } catch (error) {
+  //       setIsError(true);
+  //       setIsLoading(false);
+  //     }
+  //   };
+  //   getTickets();
+  // }, []);
 
   return (
     <div className="App">
-      {isLoading ? (
+      {tickets}
+      {/* {isLoading ? (
         <Spinner />
       ) : (
         <div className="container">
@@ -61,18 +63,19 @@ function App({ test }) {
             <ErrorMessage />
           )}
         </div>
-      )}
+      )} */}
     </div>
   );
-}
+};
 
 export default connect(
   state => ({
-    test: state
+    tickets: state.tickets,
+    ticketsAreLoaded: state.ticketsAreLoaded
   }),
   {
-    getTickets: () => {
-      getTickets();
+    getTickets: dispatch => {
+      dispatch(getTickets.request());
     }
   }
 )(App);
