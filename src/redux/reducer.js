@@ -3,7 +3,9 @@ import * as ActionTypes from "./actions";
 
 export const initialState = {
   tickets: [],
-  ticketsAreLoaded: false
+  ticketsAreLoaded: false,
+  searchId: "",
+  searchIdIsLoaded: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,11 +15,22 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.GET_TICKETS[SUCCESS]:
       return {
         ...state,
-        tickets: action.data,
+        searchId: action.data,
         ticketsAreLoaded: true
       };
     case ActionTypes.GET_TICKETS[FAILURE]:
       return { ...state, error: action.error, ticketsAreLoaded: false };
+
+    case ActionTypes.GET_SEARCH_ID[REQUEST]:
+      return { ...state, searchIdIsLoaded: false };
+    case ActionTypes.GET_SEARCH_ID[SUCCESS]:
+      return {
+        ...state,
+        searchId: action.data,
+        searchIdIsLoaded: true
+      };
+    case ActionTypes.GET_SEARCH_ID[FAILURE]:
+      return { ...state, error: action.error, searchIdIsLoaded: false };
 
     default:
       return state;

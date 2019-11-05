@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { createLogger } from "redux-logger";
 
+import { getSearchId, getTickets } from "./api";
 import reducer from "./reducer";
 
 export default function() {
@@ -28,6 +29,25 @@ export default function() {
     reducer,
     composeEnhancers(applyMiddleware(...middlewares))
   );
+
+  store.dispatch(dispatch => {
+    dispatch({ type: "GET_SEARCH_ID_REQUEST" });
+    getSearchId()
+      .then(res => {
+        const searchId = res.data.searchId;
+        dispatch({ type: "GET_SEARCH_ID_SUCCESS", data: searchId });
+        getTickets(searchId)
+          .then(res => {
+            dispatch({ type: "GET_TICKETS_SUCCESS", data: res.data.tickets });
+          })
+          .catch(error => {
+            dispatch({ type: "GET_TICKETS__FAILURE", error: error.message });
+          });
+      })
+      .catch(error => {
+        dispatch({ type: "GET_SEARCH_ID_FAILURE", error: error.message });
+      });
+  });
 
   return store;
 }

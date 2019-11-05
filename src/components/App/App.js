@@ -13,7 +13,6 @@ import { getTickets } from "../../redux/actions";
 import "./styles.scss";
 
 const App = ({ tickets, ticketsAreLoaded }) => {
-  console.log(tickets);
   // const url = "https://front-test.beta.aviasales.ru";
   // const [tickets, setTickets] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
