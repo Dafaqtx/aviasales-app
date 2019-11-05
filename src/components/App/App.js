@@ -8,8 +8,6 @@ import Content from "../Content";
 import Spinner from "../Spinner";
 import ErrorMessage from "../ErrorMessage";
 
-import { getTickets } from "../../redux/actions";
-
 import "./styles.scss";
 
 const App = ({ tickets, ticketsAreLoaded }) => {
@@ -72,9 +70,5 @@ export default connect(
     tickets: state.tickets,
     ticketsAreLoaded: state.ticketsAreLoaded
   }),
-  {
-    getTickets: dispatch => {
-      dispatch(getTickets.request());
-    }
-  }
+  null
 )(App);
