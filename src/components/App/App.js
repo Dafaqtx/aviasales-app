@@ -7,10 +7,11 @@ import Sidebar from "../Sidebar";
 import Content from "../Content";
 import Spinner from "../Spinner";
 import ErrorMessage from "../ErrorMessage";
+import { fetchSearchId } from "../../redux/actions/searchIdActions";
 
 import "./styles.scss";
 
-const App = ({ tickets, ticketsAreLoaded }) => {
+const App = ({ searchId, dispatch }) => {
   // const url = "https://front-test.beta.aviasales.ru";
   // const [tickets, setTickets] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
@@ -42,10 +43,12 @@ const App = ({ tickets, ticketsAreLoaded }) => {
   //   };
   //   getTickets();
   // }, []);
+  useEffect(() => {
+    dispatch(fetchSearchId());
+  }, []);
 
   return (
     <div className="App">
-      {tickets}
       {/* {isLoading ? (
         <Spinner />
       ) : (
@@ -67,6 +70,8 @@ const App = ({ tickets, ticketsAreLoaded }) => {
 
 export default connect(
   state => ({
+    searchId: state.searchIdReducer.searchId,
+    searchIdIsLoaded: state.searchIdIsLoaded,
     tickets: state.tickets,
     ticketsAreLoaded: state.ticketsAreLoaded
   }),
