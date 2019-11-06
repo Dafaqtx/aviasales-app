@@ -10,7 +10,13 @@ import { fetchTickets } from "../../redux/actions/ticketsActions";
 
 import "./styles.scss";
 
-const App = ({ tickets, ticketsAreLoaded, ticketsError, dispatch }) => {
+const App = ({
+  tickets,
+  ticketsAreLoaded,
+  ticketsError,
+  sortedTicketByPrice,
+  dispatch
+}) => {
   useEffect(() => {
     dispatch(fetchTickets());
   }, []);
@@ -23,7 +29,7 @@ const App = ({ tickets, ticketsAreLoaded, ticketsError, dispatch }) => {
           {!ticketsError ? (
             <div className="App__wrapper">
               <Sidebar />
-              <Content tickets={tickets} />
+              <Content tickets={sortedTicketByPrice} />
             </div>
           ) : (
             <ErrorMessage />
@@ -40,7 +46,10 @@ export default connect(
   state => ({
     tickets: state.ticketsReducer.tickets,
     ticketsAreLoaded: state.ticketsReducer.ticketsAreLoaded,
-    ticketsError: state.ticketsReducer.ticketsError
+    ticketsError: state.ticketsReducer.ticketsError,
+    sortedTicketByPrice: state.ticketsReducer.tickets.sort((a, b) =>
+      a.price > b.price ? 1 : -1
+    )
   }),
   null
 )(App);
