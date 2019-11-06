@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import Header from "../Header";
@@ -7,60 +6,21 @@ import Sidebar from "../Sidebar";
 import Content from "../Content";
 import Spinner from "../Spinner";
 import ErrorMessage from "../ErrorMessage";
-import { fetchSearchId } from "../../redux/actions/searchIdActions";
 import { fetchTickets } from "../../redux/actions/ticketsActions";
 
 import "./styles.scss";
 
-const App = ({ searchId, dispatch }) => {
-  // const url = "https://front-test.beta.aviasales.ru";
-  // const [tickets, setTickets] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [isError, setIsError] = useState(false);
-
-  // useEffect(() => {
-  //   const getTickets = async () => {
-  //     setIsError(false);
-  //     setIsLoading(true);
-
-  //     try {
-  //       const {
-  //         data: { searchId }
-  //       } = await axios(`${url}/search`);
-
-  //       const {
-  //         data: { stop, tickets }
-  //       } = await axios(`${url}/tickets?searchId=${searchId}`);
-
-  //       if (!stop) {
-  //         setTickets(tickets);
-  //       }
-
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       setIsError(true);
-  //       setIsLoading(false);
-  //     }
-  //   };
-  //   getTickets();
-  // }, []);
+const App = ({ tickets, ticketsAreLoaded, ticketsError, dispatch }) => {
   useEffect(() => {
-    dispatch(fetchSearchId());
-    dispatch(fetchTickets(searchId));
-  }, []);
-
-  useEffect(() => {
-    dispatch(fetchTickets(searchId));
+    dispatch(fetchTickets());
   }, []);
 
   return (
     <div className="App">
-      {/* {isLoading ? (
-        <Spinner />
-      ) : (
+      {ticketsAreLoaded ? (
         <div className="container">
           <Header />
-          {!isError ? (
+          {!ticketsError ? (
             <div className="App__wrapper">
               <Sidebar />
               <Content tickets={tickets} />
@@ -69,17 +29,18 @@ const App = ({ searchId, dispatch }) => {
             <ErrorMessage />
           )}
         </div>
-      )} */}
+      ) : (
+        <Spinner />
+      )}
     </div>
   );
 };
 
 export default connect(
   state => ({
-    searchId: state.searchIdReducer.searchId,
-    searchIdIsLoaded: state.searchIdIsLoaded,
-    tickets: state.tickets,
-    ticketsAreLoaded: state.ticketsAreLoaded
+    tickets: state.ticketsReducer.tickets,
+    ticketsAreLoaded: state.ticketsReducer.ticketsAreLoaded,
+    ticketsError: state.ticketsReducer.ticketsError
   }),
   null
 )(App);
