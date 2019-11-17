@@ -3,16 +3,16 @@ import classNames from "classnames";
 import "./style.scss";
 
 const Tabs = () => {
-  const [activeTab, setActiveTab] = useState("economical");
+  const [activeTab, setActiveTab] = useState("price");
   return (
     <div className="Tabs">
       <button
         type="button"
         className={classNames("Tabs__button", {
-          "Tabs__button--active": activeTab === "economical"
+          "Tabs__button--active": activeTab === "price"
         })}
         onClick={() => {
-          setActiveTab("economical");
+          setActiveTab("price");
         }}
       >
         Самый дешевый
