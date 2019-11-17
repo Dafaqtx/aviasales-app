@@ -15,6 +15,7 @@ const App = ({
   ticketsError,
   sortedTicketByPrice,
   sortedTicketsByFast,
+  activeFilter,
   dispatch
 }) => {
   useEffect(() => {
@@ -29,7 +30,7 @@ const App = ({
           {!ticketsError ? (
             <div className="App__wrapper">
               <Sidebar />
-              <Content tickets={sortedTicketsByFast} />
+              <Content tickets={sortedTicketsByFast} filter={activeFilter} />
             </div>
           ) : (
             <ErrorMessage />
@@ -59,7 +60,8 @@ export default connect(
         .reduce((a, b) => a + b, 0);
 
       return durationA > durationB ? 1 : -1;
-    })
+    }),
+    activeFilter: state.filterReducer.filter
   }),
   null
 )(App);
