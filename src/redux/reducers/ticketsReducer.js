@@ -8,7 +8,9 @@ export const initialState = {
 
   tickets: [],
   ticketsAreLoaded: false,
-  ticketsError: false
+  ticketsError: false,
+
+  sortedIsLoading: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -31,20 +33,27 @@ const reducer = (state = initialState, action) => {
       };
 
     case ActionTypes.GET_TICKETS[REQUEST]:
-      return { ...state, ticketsAreLoaded: false, ticketsError: false };
+      return {
+        ...state,
+        ticketsAreLoaded: false,
+        ticketsError: false,
+        sortedIsLoading: false
+      };
     case ActionTypes.GET_TICKETS[SUCCESS]:
       return {
         ...state,
         tickets: action.data,
         ticketsAreLoaded: true,
-        ticketsError: false
+        ticketsError: false,
+        sortedIsLoading: true
       };
     case ActionTypes.GET_TICKETS[FAILURE]:
       return {
         ...state,
         error: action.error,
         ticketsAreLoaded: false,
-        ticketsError: true
+        ticketsError: true,
+        sortedIsLoading: false
       };
 
     default:

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import Header from "../Header";
@@ -15,12 +15,16 @@ const App = ({
   ticketsError,
   sortedTicketByPrice,
   sortedTicketsByFast,
-  activeFilter,
+
   dispatch
 }) => {
   useEffect(() => {
     dispatch(fetchTickets());
-  }, []);
+  }, [dispatch]);
+
+  const [activeFilter, setActiveFilter] = useState("price");
+
+  const handleFilterChange = filterName => setActiveFilter(filterName);
 
   return (
     <div className="App">
@@ -30,7 +34,15 @@ const App = ({
           {!ticketsError ? (
             <div className="App__wrapper">
               <Sidebar />
-              <Content tickets={sortedTicketsByFast} filter={activeFilter} />
+              <Content
+                onChangeFilter={handleFilterChange}
+                tickets={
+                  activeFilter === "price"
+                    ? sortedTicketByPrice
+                    : sortedTicketsByFast
+                }
+                filter={activeFilter}
+              />
             </div>
           ) : (
             <ErrorMessage />
@@ -43,15 +55,13 @@ const App = ({
   );
 };
 
-export default connect(
-  state => ({
-    tickets: state.ticketsReducer.tickets,
-    ticketsAreLoaded: state.ticketsReducer.ticketsAreLoaded,
-    ticketsError: state.ticketsReducer.ticketsError,
-    sortedTicketByPrice: state.ticketsReducer.tickets.sort((a, b) =>
-      a.price > b.price ? 1 : -1
-    ),
-    sortedTicketsByFast: state.ticketsReducer.tickets.sort((a, b) => {
+export default connect(state => {
+  const tickets = state.ticketsReducer.tickets;
+  const sortedTicketByPrice = [
+    ...tickets.sort((a, b) => (a.price > b.price ? 1 : -1))
+  ];
+  const sortedTicketsByFast = [
+    ...tickets.sort((a, b) => {
       const durationA = a.segments
         .map(s => s.duration)
         .reduce((a, b) => a + b, 0);
@@ -60,8 +70,15 @@ export default connect(
         .reduce((a, b) => a + b, 0);
 
       return durationA > durationB ? 1 : -1;
-    }),
+    })
+  ];
+
+  return {
+    tickets,
+    ticketsAreLoaded: state.ticketsReducer.ticketsAreLoaded,
+    ticketsError: state.ticketsReducer.ticketsError,
+    sortedTicketByPrice,
+    sortedTicketsByFast,
     activeFilter: state.filterReducer.filter
-  }),
-  null
-)(App);
+  };
+}, null)(App);

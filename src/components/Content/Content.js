@@ -4,10 +4,10 @@ import Tickets from "../Tickets";
 
 import "./style.scss";
 
-const Content = ({ tickets }) => {
+const Content = ({ tickets, onChangeFilter }) => {
   return (
     <div className="Content">
-      <Tabs />
+      <Tabs onChangeFilter={onChangeFilter} />
       <Tickets tickets={tickets} />
     </div>
   );

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import classNames from "classnames";
 import "./style.scss";
 
-const Tabs = () => {
+const Tabs = ({ onChangeFilter }) => {
   const [activeTab, setActiveTab] = useState("price");
+
   return (
     <div className="Tabs">
       <button
@@ -12,6 +13,7 @@ const Tabs = () => {
           "Tabs__button--active": activeTab === "price"
         })}
         onClick={() => {
+          onChangeFilter("price");
           setActiveTab("price");
         }}
       >
@@ -23,6 +25,7 @@ const Tabs = () => {
           "Tabs__button--active": activeTab === "fast"
         })}
         onClick={() => {
+          onChangeFilter("fast");
           setActiveTab("fast");
         }}
       >
