@@ -15,7 +15,6 @@ const App = ({
   ticketsError,
   sortedTicketByPrice,
   sortedTicketsByFast,
-
   dispatch
 }) => {
   useEffect(() => {
